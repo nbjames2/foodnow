@@ -4,8 +4,17 @@
   "description": "A real-time grocery list accessible by multiple people",
   "main": "src/server.js",
   "scripts": {
-    "test": "SET NODE_ENV=test&& jasmine"
+    "test": "SET NODE_ENV=test&& jasmine",
+    "start": "node src/server.js"
   },
   "author": "Nicholas James",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^6.2.0"
+  },
+  "devDependencies": {
+    "express": "^4.16.4",
+    "jasmine": "^3.3.1",
+    "request": "^2.88.0"
+  }
 }
