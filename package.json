@@ -1,0 +1,11 @@
+{
+  "name": "foodnow",
+  "version": "1.0.0",
+  "description": "A real-time grocery list accessible by multiple people",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "SET NODE_ENV=test&& jasmine"
+  },
+  "author": "Nicholas James",
+  "license": "ISC"
+}
