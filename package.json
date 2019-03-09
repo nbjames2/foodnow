@@ -10,7 +10,18 @@
   "author": "Nicholas James",
   "license": "ISC",
   "dependencies": {
-    "dotenv": "^6.2.0"
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.2.0",
+    "ejs": "^2.6.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.3.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "pg": "^7.8.2",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.43.0"
   },
   "devDependencies": {
     "express": "^4.16.4",
