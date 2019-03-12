@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ../static/partials/head.ejs %>
+    </head>
+    <body>
+        <% include ../static/partials/navbar.ejs %>
+        <main class="container">
+            <% include ../static/partials/messages.ejs %>
+                <a href="/lists/new"><div class="card-deck">
+                    <div class="card" style="width: 15rem; height: 13rem">
+                        <img class="card-img-top" src="/icons8-plus.svg" style="width: 8rem; margin-left: 1rem;" alt="add new list" id="addNew">
+                        <div class="card-body">
+                            <p class="card-text">Create a new list!</p>
+                        </div>
+                    </div>
+                </a>
+                <% lists.forEach((list) => { %>
+                    <a href="/lists/<%= list.id %>">
+                        <div class="card" style="width: 15rem; height: 13rem;">
+                            <div class="card-body">
+                                <h5 class="card-title"><%= list.title %></h5>
+                                <p>Last updated: <%= list.lastUpdated %></p>
+                                
+                            </div>
+                        </div>
+                    </a>
+                <% }) %>
+            </div>
+        </main>
+
+        <% include ../static/partials/baseScripts.ejs %>
+    </body>
+</html>

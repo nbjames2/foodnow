@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <% include ../static/partials/head.ejs %>
+    </head>
+    <body>
+        <% include ../static/partials/navbar.ejs %>
+        <main class="container">
+            <% include ../static/partials/messages.ejs %>
+                <a href="/lists/<%= listId %>/newitem"><div class="card-deck">
+                    <div class="card" style="width: 70rem; height: 9rem">
+                        <div class="card-body">
+                            <img class="card-img-top" src="/icons8-plus.svg" style="width: 3rem; padding-left: 1rem;" alt="add new list" id="addNew">
+                            <p class="card-text">Add item</p>
+                        </div>
+                    </div>
+                </a>
+                <% items.forEach((item) => { %>
+                    <div class="card" style="width: 70rem; height: 9rem;">
+                        <div class="card-body">
+                            <p><h5><%= item.item %></h5>  
+                                Max Cost: $<%= item.max %></br>
+                                <form onsubmit="<%= helpers.checkboxClicked(item.id, listId) %>">
+                                    <% if(item.purchased) { %>
+                                        <button type="submit" class="btn" style="border: none;"><img src="/icons8-ok.svg" style="width: 2rem;" alt="purchased"></button>
+                                    <% } else { %>
+                                        <button type="submit" class="btn"><img src="/icons8-checkmark.svg"></button>
+                                    <% } %>
+                                </form>
+                                <form action="/lists/<%= listId %>/edit/<%= item.id %>" method="get">
+                                    <button type="submit" class="btn btn-large">Edit</button>
+                                </form>             
+                            </p>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+        </main>
+
+        <% include ../static/partials/baseScripts.ejs %>
+        
+    </body>
+</html>
