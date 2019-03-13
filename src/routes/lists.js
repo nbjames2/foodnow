@@ -12,5 +12,9 @@ router.get("/lists/:id/newItem", listController.newItemForm);
 router.post("/lists/:id/newItem", helper.ensureAuthenticated, validation.validateItem, listController.createItem);
 router.get("/lists/:id/edit/:itemId", listController.editView);
 router.post("/lists/:id/edit/:itemId", helper.ensureAuthenticated, validation.validateItem, listController.edit);
+router.post("/lists/:id/access", helper.ensureAuthenticated, validation.validateAccess, listController.createAccess);
+router.get("/lists/:id/destroy", helper.ensureAuthenticated, listController.deleteList);
+router.get("/lists/:id/purchased/:itemId", listController.purchase);
+router.get("/lists/:id/destroy/:itemId", helper.ensureAuthenticated, listController.deleteItem);
 
 module.exports = router;

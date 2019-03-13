@@ -3,7 +3,8 @@ const ApplicationPolicy = require("./application");
 module.exports = class ListItemPolicy extends ApplicationPolicy {
  
     new() {
-        return this._isOwner() || this._hasAccess();
+        console.log(record.userId);
+        return this._hasAccess();
     }
     
     create() {

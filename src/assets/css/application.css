@@ -1,13 +1,23 @@
 body {
     padding-top: 54px;
 }
-.btn {
-    background-color: #ffffff;
-    border: none;
-    padding: 12px 16px;
-    font-size: 16px;
+
+.lists {
+    margin-top: 1rem;
+    width: 15rem; 
+    height: 13rem;
 }
 
-.btn:hover {
-    background-color: lightgrey;
+#addAccessInput {
+    width: 20rem;
+}
+
+.button-container form,
+.button-container form div {
+    display: inline;
+}
+
+.button-container button {
+    display: inline;
+    vertical-align: middle;
 }

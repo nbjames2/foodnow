@@ -7,18 +7,28 @@
         <% include ./partials/navbar.ejs %>
         <main class="container">
             <% include ./partials/messages.ejs %>
-            <header class="jumbotron my-4">
-                <h1 class="display-3">FoodNow!</h1>
-                <p class="lead">He'll never forget again.</p>
-            </header>
-            <section class="row text-center">
-                <section class="col-lg=4">
-                    <a href="users/signup" class="btn btn-primary btn-lg">Sign up</a>
-                </section>
-                <section class="col-lg-4">
-                    <a href="users/signin" class="btn btn-primary btn-lg">Sign in</a>
-                </section>
-            </section>
+            <% if(!currentUser) { %>
+                <header class="jumbotron my-4">
+                    <h1 class="display-3">FoodNow!</h1>
+                    <p class="lead">He'll never forget again.</p>
+                </header>
+                <div style="margin-left: 17rem;">
+                    <section class="row text-center">
+                        <section class="col-lg-4">
+                            <a href="users/signup" class="btn btn-primary btn-lg btn-outline-primary">Sign up</a>
+                        </section>
+                        <section class="col-lg-4">
+                            <a href="users/signin" class="btn btn-primary btn-lg btn-outline-primary">Sign in</a>
+                        </section>
+                    </section>
+                </div>
+            <% } else { %>
+                <div>
+                    <form action="/lists" method="get" style="margin-top: 2rem;">
+                        <button type="submit">My lists</button>
+                    </form>
+                </div>
+            <% } %>
         </main>
 
         <% include ./partials/baseScripts.ejs %>

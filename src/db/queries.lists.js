@@ -1,19 +1,28 @@
 const List = require("../db/models").List;
 const Listitem = require("../db/models").Listitem;
+const ListAccess = require("../db/models").ListAccess;
 
 module.exports = {
     getLists(user, callback){
-        List.findAll({
+        var lists = [];
+        ListAccess.findAll({
             where: {
                 userId: user.id
             }
         })
-        .then((lists) => {
-            if(!lists){
-                callback(null, null);
-            } else {
-                callback(null, lists);
-            }
+        .then((accesses) => {
+            accesses.forEach((access) => {
+                List.findById(access.listId)
+                .then((list) => {
+                    lists.push(list);
+                    if(accesses.length == lists.length) {
+                        callback(null, lists);
+                    }
+                })
+                .catch((err) => {
+                    callback(err);
+                });
+            }); 
         })
         .catch((err) => {
             callback(err);
@@ -27,7 +36,16 @@ module.exports = {
             lastUpdated: dateTime
         })
         .then((list) => {
-            callback(null, list);
+            ListAccess.create({
+                userId: userId,
+                listId: list.id
+            })
+            .then((access) => {
+                callback(null, list);
+            })
+            .catch((err) => {
+                callback(err);
+            });
         })
         .catch((err) => {
             callback(err);
@@ -39,7 +57,7 @@ module.exports = {
                 listId: listId
             },
             order: [
-                ['purchased', 'DESC']
+                ['purchased', 'ASC']
             ]
         })
         .then((items) => {
@@ -55,7 +73,7 @@ module.exports = {
             item: body.item,
             max: body.max || null
         })
-        .then((item) => {s
+        .then((item) => {
             List.findById(id)
             .then((list) => {
                let updatedList = list;
@@ -121,6 +139,73 @@ module.exports = {
             .catch((err) => {
                 callback(err);
             });
+        });
+    },
+    addAccess(listId, body, callback) {
+        User.findAll({ 
+            where: {
+                email: body.email
+            }
+        })
+        .then((user) => {
+            if(!user){
+                callback(null, 'no user');
+            } else {
+                ListAccess.create({
+                    userId: user.id,
+                    listId: listId
+                })
+                .then((access) => {
+                    callback(null, access);
+                })
+                .catch((err) => {
+                    callback(err);
+                });
+            }
+        });
+    },
+    destroyList(listId, callback){
+        List.destroy({
+            where: {
+                id: listId
+            }
+        })
+        .then(() => {
+            callback(null, "destroyed");
+        })
+        .catch((err) => {
+            callback(err);
+        });
+    },
+    checkAccess(userId, listId, callback) {
+        ListAccess.findAll({
+            where: {
+                userId: userId,
+                listId: listId
+            }
+        })
+        .then((access) => {
+            if(access){
+                callback(null, access[0]);
+            } else {
+                callback(null, null);
+            }
+        })
+        .catch((err) => {
+            callback(err);
+        });
+    },
+    destroyItem(itemId, callback){
+        Listitem.destroy({
+            where: {
+                id: itemId
+            }
+        })
+        .then(() => {
+            callback(null, "destroyed");
+        })
+        .catch((err) => {
+            callback(err);
         });
     }
 }
