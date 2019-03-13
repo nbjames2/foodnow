@@ -338,49 +338,49 @@ describe("routes : lists", () => {
     
         describe("GET /lists/:listId/destroy", () => {
     
-            // it("should delete the list with the associated ID", (done) => {
-            //     expect(this.list.id).toBe(1);
-            //     request.get(`${base}/${this.list.id}/destroy`, (err, res, body) => {
-            //         List.findById(1)
-            //         .then((list) => {
-            //             expect(err).toBeNull();
-            //             expect(list).toBeNull();
-            //             done();
-            //         })
-            //         .catch((err) => {
-            //             console.log(err);
-            //             done();
-            //         })
-            //     });
-            // });
+            it("should delete the list with the associated ID", (done) => {
+                expect(this.list.id).toBe(1);
+                request.get(`${base}/${this.list.id}/destroy`, (err, res, body) => {
+                    List.findById(1)
+                    .then((list) => {
+                        expect(err).toBeNull();
+                        expect(list).toBeNull();
+                        done();
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                        done();
+                    })
+                });
+            });
 
-        //     it("should not delete a list for someone that does not have access permission", (done) => {
-        //         User.create({
-        //             email: "imposter@example.com",
-        //             password: "654321"
-        //         })
-        //         .then((user) => {
-        //             request.get({
-        //                 url: "http://localhost:3000/auth/fake",
-        //                 form: {
-        //                     email: user.email,
-        //                     userId: user.id
-        //                 }
-        //             },
-        //                 (err, res, body) => {
-        //                     expect(this.list.id).toBe(1);
-        //                     request.get(`${base}/${this.list.id}/destroy`, (err, res, body) => {
-        //                         List.findById(1)
-        //                         .then((list) => {
-        //                             expect(err).toBeNull();
-        //                             expect(list.title).toBe("shopping");
-        //                             done();
-        //                         })
-        //                     });
-        //                 }
-        //             );
-        //         });    
-        //     })
+            it("should not delete a list for someone that does not have access permission", (done) => {
+                User.create({
+                    email: "imposter@example.com",
+                    password: "654321"
+                })
+                .then((user) => {
+                    request.get({
+                        url: "http://localhost:3000/auth/fake",
+                        form: {
+                            email: user.email,
+                            userId: user.id
+                        }
+                    },
+                        (err, res, body) => {
+                            expect(this.list.id).toBe(1);
+                            request.get(`${base}/${this.list.id}/destroy`, (err, res, body) => {
+                                List.findById(1)
+                                .then((list) => {
+                                    expect(err).toBeNull();
+                                    expect(list.title).toBe("shopping");
+                                    done();
+                                })
+                            });
+                        }
+                    );
+                });    
+            })
         });
     
         describe("GET /lists/:listId/edit/:listitemId", () => {
@@ -394,29 +394,29 @@ describe("routes : lists", () => {
                 });
             });
 
-            // it("should not render the edit view for a member who does not have access to the list", (done) => {
-            //     User.create({
-            //         email: "imposter@example.com",
-            //         password: "654321",
-            //     })
-            //     .then((user) => {
-            //         request.get({
-            //             url: "http://localhost:3000/auth/fake",
-            //             form: {
-            //             email: user.email,
-            //             userId: user.id
-            //             }
-            //         },
-            //             (err, res, body) => {
-            //                 request.get(`${base}/${this.list.id}/edit/${this.listitem.id}`, (err, res, body) => {
-            //                     expect(err).toBeNull();
-            //                     expect(body).not.toContain("Edit");
-            //                     done();
-            //                 });
-            //             }
-            //         );
-            //     });    
-            // })
+            it("should not render the edit view for a member who does not have access to the list", (done) => {
+                User.create({
+                    email: "imposter@example.com",
+                    password: "654321",
+                })
+                .then((user) => {
+                    request.get({
+                        url: "http://localhost:3000/auth/fake",
+                        form: {
+                        email: user.email,
+                        userId: user.id
+                        }
+                    },
+                        (err, res, body) => {
+                            request.get(`${base}/${this.list.id}/edit/${this.listitem.id}`, (err, res, body) => {
+                                expect(err).toBeNull();
+                                expect(body).not.toContain("Edit");
+                                done();
+                            });
+                        }
+                    );
+                });    
+            })
         });
     
         describe("POST /lists/:listId/edit/:listitemId", () => {
@@ -528,35 +528,35 @@ describe("routes : lists", () => {
             });
         });
         
-        // describe("POST /lists/:listId/access", () => {
+        describe("POST /lists/:listId/access", () => {
 
-        //     it("should create listaccess for another user", (done) => {
-        //         User.create({
-        //             email: "tony@example.com",
-        //             password: "987654321"
-        //         })
-        //         .then((user) => {
-        //             request.post({
-        //                 url: `${base}/${this.list.id}/access`,
-        //                 form: {
-        //                     email: "tony@example.com"
-        //                 }
-        //             }, (err, res, body) => {
-        //                 ListAccess.findOne({where:{userId: user.id}})
-        //                 .then((access) => {
-        //                     expect(access).not.toBeNull();
-        //                     expect(access.userId).toBe(user.Id);
-        //                     expect(access.listId).toBe(this.list.id);
-        //                     done();
-        //                 })
-        //                 .catch((err) => {
-        //                     console.log(err);
-        //                     done();
-        //                 });
-        //             });
-        //         });
-        //     });
-        // });
+            it("should create listaccess for another user", (done) => {
+                User.create({
+                    email: "tony@example.com",
+                    password: "987654321"
+                })
+                .then((user) => {
+                    request.post({
+                        url: `${base}/${this.list.id}/access`,
+                        form: {
+                            email: "tony@example.com"
+                        }
+                    }, (err, res, body) => {
+                        ListAccess.findOne({where:{userId: user.id}})
+                        .then((access) => {
+                            expect(access).not.toBeNull();
+                            expect(access.userId).toBe(user.id);
+                            expect(access.listId).toBe(this.list.id);
+                            done();
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                            done();
+                        });
+                    });
+                });
+            });
+        });
 
         describe("GET /lists/:listId/purchased/:listitemId", () => {
 

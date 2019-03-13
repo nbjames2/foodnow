@@ -153,7 +153,6 @@ module.exports = {
             }
         })
         .then((user) => {
-            console.log(user);
             if(!user){
                 callback(null, 'no user');
             } else {
