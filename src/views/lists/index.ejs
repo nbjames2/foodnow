@@ -6,41 +6,36 @@
     <body>
         <% include ../static/partials/navbar.ejs %>
         <main class="container">
-            <% include ../static/partials/messages.ejs %>
-                                  
-                    <a href="/lists/new">
-                        <div class="card lists" style="width: 10rem; height: 8rem;">
-                            <img class="card-img-top" src="/icons8-plus.svg" style="width: 5rem; margin-left: 2rem;" alt="add new list" id="addNew">
-                            <div class="card-body" style="align-content: center;">
-                                <p class="card-text">New list!</p>
-                            </div>
-                        </div>
-                    </a>
-                
-                <% lists.forEach((list) => { %>
-                    
+            <% include ../static/partials/messages.ejs %>                
+            <a href="/lists/new">
+                <div class="card lists" style="width: 10rem; height: 8rem;">
+                    <img class="card-img-top" src="/icons8-plus.svg" style="width: 5rem; margin-left: 2rem;" alt="add new list" id="addNew">
+                    <div class="card-body" style="align-content: center;">
+                        <p class="card-text">New list!</p>
+                    </div>
+                </div>
+            </a>
+            <% if(lists) { %>
+                <% lists.forEach((list) => { %>   
                     <div class="card">
                         <div class="card-body">
                             <a href="/lists/<%= list.id %>">
                                 <h5 class="card-title"><%= list.title %></h5>
                             </a>
                             <div class="form-inline">
-                            <form action="/lists/<%= list.id %>/access" method="post" class="form-inline">
-                                <input type="text" class="form-control" id="addAccessInput" name="email" aria-describedby="emailHelp" placeholder="Email to grant access">
-                                <button type="submit" class="btn btn-outline-primary btn-sm">Add</button>
-                            </form>
-                            <form action="/lists/<%= list.id %>/destroy" method="get">
-                                <button type="submit" class="btn btn-outline-primary btn-sm">Delete list</button>
-                            </form>
+                                <form action="/lists/<%= list.id %>/access" method="post" class="form-inline">
+                                    <input type="text" class="form-control" id="addAccessInput" name="email" aria-describedby="emailHelp" placeholder="Email to grant access">
+                                    <button type="submit" class="btn btn-outline-primary btn-sm">Add</button>
+                                </form>
+                                <form action="/lists/<%= list.id %>/destroy" method="get">
+                                    <button type="submit" class="btn btn-outline-primary btn-sm">Delete list</button>
+                                </form>
                             </div>
-                            <p>Last updated: <%= list.lastUpdated %></p>
-                            
+                            <p>Last updated: <%= list.lastUpdated %></p>   
                         </div>
                     </div>
-                   
-                </div>
                 <% }) %>
-            </div>
+            <% } %>
         </main>
 
         <% include ../static/partials/baseScripts.ejs %>

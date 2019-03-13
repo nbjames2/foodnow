@@ -11,18 +11,22 @@ module.exports = {
             }
         })
         .then((accesses) => {
-            accesses.forEach((access) => {
-                List.findById(access.listId)
-                .then((list) => {
-                    lists.push(list);
-                    if(accesses.length == lists.length) {
-                        callback(null, lists);
-                    }
-                })
-                .catch((err) => {
-                    callback(err);
-                });
-            }); 
+            if(accesses[0]) {
+                accesses.forEach((access) => {
+                    List.findById(access.listId)
+                    .then((list) => {
+                        lists.push(list);
+                        if(accesses.length == lists.length) {
+                            callback(null, lists);
+                        }
+                    })
+                    .catch((err) => {
+                        callback(err);
+                    });
+                }); 
+            } else {
+                callback(null, null);
+            }
         })
         .catch((err) => {
             callback(err);
