@@ -137,6 +137,7 @@ module.exports = {
     },
     createAccess(req, res, next) { 
         const userId = req.user.id;
+        console.log("create access: " + userId);
         const listId = req.params.id;
         listQueries.checkAccess(userId, listId, (err, access) => {
             if(err || access == null){

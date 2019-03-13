@@ -1,3 +1,4 @@
+const User = require("../db/models").User;
 const List = require("../db/models").List;
 const Listitem = require("../db/models").Listitem;
 const ListAccess = require("../db/models").ListAccess;
@@ -146,12 +147,13 @@ module.exports = {
         });
     },
     addAccess(listId, body, callback) {
-        User.findAll({ 
+        User.findOne({ 
             where: {
                 email: body.email
             }
         })
         .then((user) => {
+            console.log(user);
             if(!user){
                 callback(null, 'no user');
             } else {
