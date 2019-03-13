@@ -21,7 +21,8 @@
     "passport-local": "^1.0.0",
     "pg": "^7.8.2",
     "pg-hstore": "^2.3.2",
-    "sequelize": "^4.43.0"
+    "sequelize": "^4.43.0",
+    "sequelize-cli": "^5.4.0"
   },
   "devDependencies": {
     "express": "^4.16.4",
