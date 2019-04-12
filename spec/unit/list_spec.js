@@ -6,7 +6,7 @@ describe("List", () => {
     
     beforeEach((done) => {
         this.user;
-        const datetime = new Date(Date.now()).toLocaleString();
+        
 
         sequelize.sync({force: true})
         .then(() => {
@@ -28,7 +28,7 @@ describe("List", () => {
     describe("#create()", () => {
 
         it("should create a list with a valid title", (done) => {
-            console.log(datetime);
+            const datetime = new Date(Date.now()).toLocaleString();
             List.create({
                 userId: this.user.id,
                 title: "shopping",
