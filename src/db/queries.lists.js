@@ -14,7 +14,7 @@ module.exports = {
         .then((accesses) => {
             if(accesses[0]) {
                 accesses.forEach((access) => {
-                    List.findById(access.listId)
+                    List.findOne({ where: { id: access.listId}})
                     .then((list) => {
                         lists.push(list);
                         if(accesses.length == lists.length) {
@@ -79,7 +79,7 @@ module.exports = {
             max: body.max || null
         })
         .then((item) => {
-            List.findById(id)
+            List.findOne({ where: { id: id } } )
             .then((list) => {
                let updatedList = list;
                updatedList.lastUpdated = new Date(Date.now()).toLocaleString();
@@ -97,7 +97,7 @@ module.exports = {
     },
     updatePurchase(itemId, callback) {
         let purchased;
-        Listitem.findById(itemId)
+        Listitem.findOne({ where: {id: itemId} })
         .then((item) => {
             if(item.purchased == false) {
                 purchased = true;
@@ -116,7 +116,7 @@ module.exports = {
         });
     },
     getItem(itemId, callback) {
-        Listitem.findById(itemId)
+        Listitem.findOne({ where: {id: itemId} })
         .then((item) => {
             callback(null, item);
         })
@@ -131,7 +131,7 @@ module.exports = {
         } else {
             purchased = false;
         }
-        Listitem.findById(itemId)
+        Listitem.findOne({ where: {id: itemId} })
         .then((item) => {
             item.update({
                 item: body.item,

@@ -24,7 +24,7 @@ module.exports = {
             callback(null, user.id);
         });
         passport.deserializeUser((id, callback) => {
-            User.findById(id)
+            User.findOne({where: {id: id} } )
             .then((user) => {
                 callback(null, user);
             })

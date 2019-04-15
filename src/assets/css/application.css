@@ -21,3 +21,74 @@ body {
     display: inline;
     vertical-align: middle;
 }
+
+.listContainer {
+    display: grid;
+    padding: 20px;
+    grid-template-columns: 10% 1fr 10%;
+    justify-items: center;
+}
+
+.lists {
+    justify-self: center;
+    width: 100%;
+    grid-template-rows: repeat(3, 50px);
+    grid-gap: 10px;
+}
+
+.addNew {
+    grid-column: 1 / 2;
+    text-align: center;
+    padding: 10px;
+}
+
+#addNew {
+    width: 60px;
+}
+
+.itemContainer {
+    display: grid;
+    grid-gap: 10px;
+    grid-column: 2 / 3;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 120px;  
+}
+
+.item {
+    grid-column: 2 / 3;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.alert {
+    grid-column: 1 / -1;
+}
+
+.imgContainer {
+    grid-row: 1 / 4;
+    justify-items: center;
+    align-items: center;   
+}
+
+.items {
+    width: 100%;
+    grid-column: 2 / 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-auto-rows: 50px;
+    justify-self: left;
+    padding-left: 100px;
+    align-items: center;
+    border: 1px solid black;
+}
+
+.itemBtns {
+    grid-column: 3 / 4;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.navbar-brand {
+    padding-left: 30px;
+}
